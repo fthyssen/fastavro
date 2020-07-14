@@ -15,6 +15,8 @@ def _clean_json_value(collection, key, value):
         collection[key] = value.isoformat()
     elif isinstance(value, (Decimal, UUID)):
         collection[key] = str(value)
+    elif isinstance(value, bytes):
+        collection[key] = value.hex()
     else:
         _clean_json_record(value)
 
