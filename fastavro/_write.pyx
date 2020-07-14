@@ -113,7 +113,7 @@ cdef inline write_double(bytearray fo, double datum, schema=None):
     fo += ch_temp[:8]
 
 
-cdef inline write_bytes(bytearray fo, bytes datum, schema=None):
+cdef inline write_bytes(bytearray fo, object datum, schema=None):
     """Bytes are encoded as a long followed by that many bytes of data."""
     write_long(fo, len(datum))
     fo += datum
@@ -150,7 +150,7 @@ cdef inline write_enum(bytearray fo, datum, schema):
     write_int(fo, index)
 
 
-cdef write_array(bytearray fo, list datum, schema):
+cdef write_array(bytearray fo, object datum, schema):
     """Arrays are encoded as a series of blocks.
 
     Each block consists of a long count value, followed by that many array
